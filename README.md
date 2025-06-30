@@ -1,22 +1,10 @@
 # CS-350
 Project Reflection
 
-Over the semester, I took a vanilla Raspberry Pi from fresh OS install through a series of hands-on labs—SSH setup, GPIO button and LED control, I²C sensor readings, state-machine design, threading, and finally a full thermostat system. Each module built on the last: we learned to connect and configure hardware, write clean Python drivers, manage concurrent tasks, and model behavior as states. By the end, I had an embedded application that maintained a target temperature automatically.
-What did you do particularly well?
+Over the semester I carried a fresh Raspberry Pi through every stage of embedded‐systems development: from headless SSH setup and basic GPIO-driven LEDs and buttons, to I²C sensor integration, finite-state-machine design, threading, and finally a fully automated thermostat. By gradually building reusable hardware-abstraction modules and clean control logic, I ended up with a device that reliably reads temperature and humidity, displays them on a 16×2 LCD, and toggles a heating element based on user-defined thresholds.
 
-I kept each lab’s code modular—separating hardware interface, control logic, and user I/O—so I could reuse GPIO and sensor classes in later assignments. My state-machine implementations clearly mapped out transitions, and I used threading smartly to poll sensors without blocking the main loop. I documented every step, from Pi network configuration to Python dependencies, making setup repeatable.
-Where could you improve?
+Modularity was my greatest strength. Early on I separated pin definitions, sensor drivers, state-machine logic, and user interfaces into distinct files, which made it trivial to repurpose components for later labs. Threading allowed sensor polling without blocking, and using the statemachine library kept transitions clear and declarative. Thorough inline comments and a step-by-step README meant anyone could reproduce my setup—from OS install and network configuration to Python virtual-environment management.
 
-I didn’t introduce automated testing early enough; I relied on the actual hardware for almost every change. Next time I’d mock GPIO and sensor inputs so I could catch logic bugs on my laptop. I also learned that extracting all pin mappings and thresholds into a single config file sooner would have saved time when lab requirements changed.
-What tools and resources are now in my support network?
+In hindsight, I should have introduced automated testing much sooner. Relying exclusively on physical hardware slowed iterations and made it easy to overlook edge cases. Moving forward I’ll mock GPIO and sensor inputs with unittest.mock or pytest fixtures so I can validate logic on my laptop. I also learned that centralizing all configuration (pin mappings, I²C addresses, temperature thresholds) in a single file from day one saves countless refactoring headaches when requirements shift.
 
-I regularly reference the Raspberry Pi official docs, the gpiozero library reference, and community Q&A on Raspberry Pi Stack Exchange. I’ve bookmarked Python’s unittest.mock and pytest guides for hardware simulation, and I use GitHub Actions to run linting and tests on every commit.
-Which skills from this course are most transferable?
-
-Designing and documenting finite-state machines, writing hardware-abstraction layers, and managing concurrent tasks all apply to robotics, IoT, and backend systems with background workers. Learning to configure Linux headlessly over SSH and automate deployments is also vital for any devops or cloud-infrastructure work.
-How did I make the work maintainable, readable, and adaptable?
-
-– Modular code structure: hardware drivers, control logic, and user interfaces live in separate modules.
-– Single source of truth: all pin numbers, I²C addresses, and temperature thresholds in one config file.
-– Clear documentation: README setup steps, inline comments, and class-docstrings guide future contributors through wiring and code usage.
-– Version control: small, focused commits for each lab ensure a clear history and easy rollback.
+Throughout the course I leaned heavily on the official Raspberry Pi documentation, the gpiozero API reference, and community Q&A on Raspberry Pi Stack Exchange. I’m now comfortable with headless Linux management over SSH and automating deployments via scripts—a skill set that translates directly to IoT, robotics, and cloud environments with background workers. Keeping code small, focused, and well-documented ensures that this project remains readable, maintainable, and adaptable for whatever I build next.
